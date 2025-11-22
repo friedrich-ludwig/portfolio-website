@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Game Style</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Gaming Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Startscreen -->
+  <div class="startscreen" id="startscreen">
+    <div class="start-container">
+      <h1 class="game-title">Friedrich Ludwig</h1>
+      <button onclick="startJourney()" class="start-btn">Begin Journey</button>
+      <p class="wip-note">
+        This website is currently a WIP.<br>
+        I will add content and improve the design.<br>
+        Have fun.
+      </p>
+    </div>
+  </div>
+
+  <!-- Home (versteckt bis Start gedrückt wird) -->
+  <div class="home hidden" id="home">
+    <!-- Header -->
+    <header class="header slide-top">
+      <h1>Welcome</h1>
+    </header>
+
+    <!-- Landing Bereiche -->
+    <div class="landing">
+      <a href="projects.html" class="landing-section left" data-type="projects">
+        Projects
+        <div class="overlay"></div>
+      </a>
+      <a href="creative.html" class="landing-section center" data-type="creative">
+        Creative Work
+        <div class="overlay"></div>
+      </a>
+      <a href="about.html" class="landing-section right" data-type="about">
+        About Me
+        <div class="overlay"></div>
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer slide-bottom">
+      <p>
+        &copy; 2025 Friedrich Ludwig | 
+        <a href="mailto:FriedrichLudwig12@gmail.com">FriedrichLudwig12@gmail.com</a> | <a href="https://drive.google.com/drive/folders/1sOY0ledoUNqmxK_D5MI3KfZ2VQTHgM91?usp=drive_link">Google Drive</a>
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    function startJourney() {
+      const start = document.getElementById("startscreen");
+      const home = document.getElementById("home");
+
+      // Startscreen rausanimieren
+      start.classList.add("fade-out");
+
+      // Nach Ende der Animation Home einblenden
+      setTimeout(() => {
+        start.style.display = "none";
+        home.classList.remove("hidden");
+        home.classList.add("fade-in");
+
+        // Header und Footer separat animieren
+        document.querySelector(".header").classList.add("slide-in-top");
+        document.querySelector(".footer").classList.add("slide-in-bottom");
+      }, 1000); // Dauer der fade-out-Animation
+    }
+  </script>
+</body>
+</html>

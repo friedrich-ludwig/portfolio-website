@@ -1,0 +1,396 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background: #1a1a1a;
+  color: #e5e5e5;
+}
+
+/* Layout: Header + Landing + Footer */
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Header */
+.header {
+  background: #111;
+  padding: 15px 20px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  flex-shrink: 0; /* nicht schrumpfen */
+}
+
+/* Footer */
+.footer {
+  background: #111;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  flex-shrink: 0; /* nicht schrumpfen */
+}
+
+.footer a {
+  color: #f9fafb;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #10b981;
+}
+
+/* Landing-Bereiche (mittlerer Bereich) */
+.landing {
+  display: flex;
+  flex: 1; /* füllt den verfügbaren Platz zwischen Header & Footer */
+  flex-direction: row;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Landing Sections */
+.landing-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1rem, 5vw, 3rem);
+  font-weight: bold;
+  color: #f9fafb;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  text-align: center;
+  z-index: 2;
+}
+
+/* Overlay für Bilder */
+.landing-section .overlay {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 1;
+}
+
+/* Schwarzer Filter */
+.landing-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  pointer-events: none;
+}
+
+/* Hover: Overlay sichtbar */
+.landing-section:hover::before,
+.landing-section:hover .overlay {
+  opacity: 1;
+}
+
+/* Farben + Schräge */
+.left   { background: #2d3748; clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%); }
+.center { background: #374151; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%); }
+.right  { background: #4b5563; clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%); }
+
+/* Hover Zoom */
+.landing-section:hover {
+  transform: scale(1.05);
+  z-index: 2;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .landing { flex-direction: column; }
+  .left, .center, .right { clip-path: none; }
+  .landing-section { font-size: clamp(1rem, 6vw, 2rem); height: 33.3%; }
+}
+
+@media (max-width: 480px) {
+  .landing-section { font-size: clamp(0.9rem, 7vw, 1.5rem); }
+  .footer p { display: flex; flex-direction: column; gap: 5px; }
+}
+
+/* Subpage Header */
+.subpage-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  background: #111;
+  color: #f9fafb;
+}
+
+/* Zurück-Button */
+.back-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: #374151;
+  color: #f9fafb;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.back-btn:hover {
+  background: #10b981;
+  transform: scale(1.05);
+}
+
+/* Content Bereich */
+.content {
+  flex: 1;
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.content h2 {
+  margin-top: 20px;
+  color: #f9fafb;
+}
+
+.content p {
+  margin-top: 10px;
+  line-height: 1.6;
+  color: #d1d5db;
+}
+
+/* Startscreen */
+.startscreen {
+  background: #0a0a0a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #f9fafb;
+  font-family: 'Press Start 2P', monospace; /* Retro Look */
+  text-align: center;
+}
+
+.game-title {
+  font-size: clamp(2rem, 8vw, 5rem);
+  margin-bottom: 40px;
+}
+
+.start-btn {
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 12px;
+  background: #10b981;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.start-btn:hover {
+  transform: scale(1.1);
+  background: #059669;
+}
+
+/* Loading Screen */
+.loading-screen {
+  background: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Press Start 2P', monospace;
+  color: #f9fafb;
+}
+
+.loading-text {
+  font-size: 1.5rem;
+  animation: blink 1.2s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* WIP Hinweis */
+.wip-note {
+  margin-top: 25px;
+  font-size: 0.75rem;
+  color: #9ca3af; /* hellgrau */
+  line-height: 1.5;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body {
+  margin: 0;
+  font-family: 'Press Start 2P', monospace, sans-serif;
+  background: #1a1a1a;
+  color: #f9fafb;
+}
+
+/* --- Startscreen --- */
+.startscreen {
+  position: fixed;
+  inset: 0;
+  background: #0a0a0a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.start-container {
+  text-align: center;
+}
+
+.game-title {
+  font-size: clamp(2rem, 8vw, 5rem);
+  margin-bottom: 40px;
+}
+
+.start-btn {
+  padding: 15px 30px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 12px;
+  background: #10b981;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.start-btn:hover {
+  transform: scale(1.1);
+  background: #059669;
+}
+
+.wip-note {
+  margin-top: 25px;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  line-height: 1.5;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Animations */
+.fade-out {
+  animation: fadeOut 1s forwards;
+}
+
+.fade-in {
+  animation: fadeIn 1.2s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* --- Home Bereich --- */
+.hidden {
+  display: none;
+}
+
+.header, .footer {
+  opacity: 0;
+  transform: translateY(0);
+  transition: transform 1s ease, opacity 1s ease;
+}
+
+.slide-in-top {
+  opacity: 1;
+  transform: translateY(0);
+  animation: slideTop 1s forwards;
+}
+
+.slide-in-bottom {
+  opacity: 1;
+  transform: translateY(0);
+  animation: slideBottom 1s forwards;
+}
+
+@keyframes slideTop {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideBottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* --- PROJECT SECTION --- */
+
+.project {
+  margin-bottom: 3rem;
+}
+
+.project h2 {
+  margin-bottom: 1rem;
+}
+
+.project-images {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap; /* Bei kleinen Screens umbrechen */
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.project-images img {
+  width: 32%;            /* Drei Bilder nebeneinander */
+  min-width: 200px;      /* verhindert zu kleine Bilder */
+  height: auto;
+  border-radius: 10px;   /* leicht abgerundete Ecken */
+  object-fit: cover;
+}
+
+/* Für sehr kleine Bildschirme */
+@media (max-width: 600px) {
+  .project-images img {
+    width: 48%;  /* Zwei nebeneinander */
+  }
+}
+
+@media (max-width: 400px) {
+  .project-images img {
+    width: 100%; /* Eins pro Zeile */
+  }
+}

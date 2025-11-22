@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading...</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="loading-screen">
+  <div class="loading-container">
+    <p class="loading-text">Loading<span id="dots"></span></p>
+  </div>
+
+  <script>
+    // animierende Punkte
+    let dots = document.getElementById("dots");
+    let count = 0;
+    setInterval(() => {
+      count = (count + 1) % 4;
+      dots.textContent = ".".repeat(count);
+    }, 500);
+
+    // nach 3 Sekunden weiterleiten
+    setTimeout(() => {
+      window.location.href = "home.html";
+    }, 3000);
+  </script>
+</body>
+</html>
